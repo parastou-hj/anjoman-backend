@@ -1,24 +1,53 @@
+# Log files
 *.log
+
+# OS generated files
 .DS_Store
+Thumbs.db
+
+# Environment files (شامل اطلاعات حساس)
 .env
 .env.backup
 .env.production
+
+# PHP / Test tools
 .phpactor.json
 .phpunit.result.cache
+/.phpunit.cache
+
+# IDE and editor folders
 /.fleet
 /.idea
 /.nova
-/.phpunit.cache
 /.vscode
 /.zed
+
+# Composer auth file
 /auth.json
+
+# Node dependencies
 /node_modules
+
+# Laravel public and storage build files
 /public/build
 /public/hot
 /public/storage
+
+# Storage keys and cache
 /storage/*.key
 /storage/pail
+
+# Vendor dependencies
 /vendor
+
+# Homestead (local dev environment)
 Homestead.json
 Homestead.yaml
-Thumbs.db
+
+# ---------------------------------------
+# ✅ دیتابیس SQLite را از ignore خارج کردیم
+# همه فایل‌های پوشه database نادیده گرفته می‌شوند،
+# به جز فایل database.sqlite
+/database/*
+!database/database.sqlite
+# ---------------------------------------

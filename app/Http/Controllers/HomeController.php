@@ -6,6 +6,7 @@ use App\Models\Slider;
 use App\Models\Journal;
 use App\Models\Gallery;
 use App\Models\News;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,13 +25,16 @@ class HomeController extends Controller
         
         $galleries = Gallery::where('is_active', true)
                            ->orderBy('order')
-                           ->get();
+                           ->get(['id', 'image', 'alt', 'description']);
         
         $news = News::where('is_active', true)
                    ->latest()
                    ->take(6)
                    ->get();
 
-        return view('home', compact('sliders', 'journals', 'galleries', 'news'));
+        // خواندن منوهای فعال از دیتابیس
+        $menus = Menu::getMainMenusWithChildren();
+
+        return view('home', compact('sliders', 'journals', 'galleries', 'news', 'menus'));
     }
 }

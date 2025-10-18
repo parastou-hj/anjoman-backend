@@ -3,63 +3,90 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // نمایش لیست
     public function index()
     {
-        //
+        $galleries = Gallery::orderBy('order')->get();
+        return view('admin.galleries.index', compact('galleries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // فرم ایجاد
     public function create()
     {
-        //
+        return view('admin.galleries.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // ذخیره در دیتابیس
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'alt' => 'nullable|max:255',
+            'description' => 'nullable',
+            'order' => 'required|integer',
+            'is_active' => 'boolean',
+        ]);
+
+        // آپلود تصویر
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('galleries', 'public');
+        }
+
+        Gallery::create($validated);
+
+        return redirect()->route('admin.galleries.index')
+            ->with('success', 'تصویر با موفقیت به گالری اضافه شد');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // فرم ویرایش
+    public function edit(Gallery $gallery)
     {
-        //
+        return view('admin.galleries.edit', compact('gallery'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // بروزرسانی
+    public function update(Request $request, Gallery $gallery)
     {
-        //
+        $validated = $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'alt' => 'nullable|max:255',
+            'description' => 'nullable',
+            'order' => 'required|integer',
+            'is_active' => 'boolean',
+        ]);
+
+        // اگر تصویر جدید آپلود شد
+        if ($request->hasFile('image')) {
+            // حذف تصویر قدیمی
+            if ($gallery->image) {
+                Storage::disk('public')->delete($gallery->image);
+            }
+            $validated['image'] = $request->file('image')->store('galleries', 'public');
+        }
+
+        $gallery->update($validated);
+
+        return redirect()->route('admin.galleries.index')
+            ->with('success', 'تصویر گالری با موفقیت بروزرسانی شد');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // حذف
+    public function destroy(Gallery $gallery)
     {
-        //
-    }
+        // حذف تصویر
+        if ($gallery->image) {
+            Storage::disk('public')->delete($gallery->image);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $gallery->delete();
+
+        return redirect()->route('admin.galleries.index')
+            ->with('success', 'تصویر از گالری حذف شد');
     }
 }

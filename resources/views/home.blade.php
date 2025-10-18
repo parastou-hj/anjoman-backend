@@ -11,6 +11,9 @@
   <!-- Owl Carousel -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+
   <style>
     :root{
       --brand:#246b5f;
@@ -22,11 +25,13 @@
       --card:#ffffff;
       --ring: rgba(36,107,95,.25);
       --radius: 16px;
-      --shadow: 0 10px 24px rgba(8,26,34,0.08);
+      --shadow: 0px 0px 24px 2px rgba(8,26,34,0.08);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; background:var(--bg); color:var(--text); font-family:'Vazirmatn', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.9}
+    body{
+      font-size:14px;
+      margin:0; background:var(--bg); color:var(--text); font-family:'Vazirmatn', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.9}
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
     .container{max-width:1200px; margin-inline:auto; padding-inline:16px}
@@ -67,8 +72,23 @@
     .section{padding:56px 0}
     .section h3{font-size:clamp(18px,2.6vw,28px); margin:0 0 18px 0}
 
-    .card{background:var(--card); border:1px solid #eef1f4; border-radius:18px; overflow:hidden; box-shadow:var(--shadow)}
+    .card{background:var(--card); border:1px solid #eef1f4; border-radius:18px; overflow:hidden;}
     .card .meta{padding:12px 14px}
+    .card img{
+      height:100%;
+       object-fit:contain;
+       transition:all .3s
+
+    }
+    .card-img{
+      height:300px;
+      overflow:hidden;
+           
+    }
+    .card:hover img{
+      transform:scale(1.1);
+       transition:all .3s
+    }
     .tag{display:inline-block; padding:4px 10px; background:#eef6f4; color:var(--brand); border-radius:999px; font-size:12px; font-weight:700}
 
     .about{display:grid; grid-template-columns: 1.2fr 1fr; gap:24px; align-items:center}
@@ -97,6 +117,29 @@
 
     .muted{color:var(--muted)}
     .lead{font-size:18px}
+    .lightbox .description { 
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  background: linear-gradient(transparent, rgba(0,0,0,0.8)); 
+  color: #fff; 
+  padding: 30px 20px 20px; 
+  text-align: center;
+  max-height: 25vh;
+  overflow-y: auto;
+}
+
+.lightbox .description:empty {
+  display: none;
+}
+
+.journal-sec:hover a{
+  color:var(--brand) !important
+}
+.journal-sec .card:hover{
+  box-shadow: var(--shadow);
+}
 
     @media (max-width: 960px){.about{grid-template-columns:1fr} .footer-grid{grid-template-columns:1fr 1fr}}
     @media (max-width: 720px){
@@ -109,20 +152,53 @@
   </style>
 </head>
 <body>
-  <header>
+    <!-- بخش Navigation در home.blade.php را با این جایگزین کنید -->
+
+<header>
     <div class="container nav" role="navigation" aria-label="ناوبری اصلی">
       <a href="/" class="brand">
-        <div class="logo">🌾</div>
+        <div class="logo">
+          <img src="" alt="">
+        </div>
         <span>انجمن علمی توسعه روستایی</span>
       </a>
       <button class="menu-btn" aria-controls="primary-nav" aria-expanded="false" title="منو">☰</button>
       <nav id="primary-nav" aria-label="Primary">
         <ul>
-          <li><a href="#hero">خانه</a></li>
-          <li><a href="#journals">نشریات</a></li>
-          <li><a href="#about">درباره‌ما</a></li>
-          <li><a href="#gallery">گالری</a></li>
-          <li><a href="#contact">تماس با ما</a></li>
+          <!-- منوهای داینامیک از دیتابیس -->
+          @foreach($menus as $menu)
+            <li class="{{ $menu->hasChildren() ? 'has-submenu' : '' }}">
+              @if($menu->url)
+                <a href="{{ $menu->url }}" target="{{ $menu->target }}">
+                  {{ $menu->title }}
+                  @if($menu->hasChildren())
+                    <span style="margin-right: 5px;">▼</span>
+                  @endif
+                </a>
+              @else
+                <a href="#" onclick="return false;">
+                  {{ $menu->title }}
+                  @if($menu->hasChildren())
+                    <span style="margin-right: 5px;">▼</span>
+                  @endif
+                </a>
+              @endif
+              
+              @if($menu->hasChildren())
+                <ul class="submenu">
+                  @foreach($menu->children as $submenu)
+                    <li>
+                      <a href="{{ $submenu->url ?: '#' }}" target="{{ $submenu->target }}">
+                        {{ $submenu->title }}
+                      </a>
+                    </li>
+                  @endforeach
+                </ul>
+              @endif
+            </li>
+          @endforeach
+
+          <!-- منوهای ثابت (ورود/پنل مدیریت) -->
           @auth
             @if(auth()->user()->role === 'admin')
               <li><a class="cta" href="{{ route('admin.dashboard') }}">پنل مدیریت</a></li>
@@ -133,7 +209,8 @@
         </ul>
       </nav>
     </div>
-  </header>
+</header>
+ 
 
   <main id="hero" class="container">
     <!-- Hero Slider - داده‌ها از دیتابیس -->
@@ -170,13 +247,16 @@
     </section>
 
     <!-- Journals - داده‌ها از دیتابیس -->
-    <section id="journals" class="section">
+    <section id="journals" class="journal-sec section">
       <h3>نشریات و مجلات انجمن</h3>
       @if($journals->count() > 0)
         <div class="owl-carousel journals-carousel">
           @foreach($journals as $journal)
-            <article class="card item">
-              <img src="{{ asset('storage/' . $journal->image) }}" alt="{{ $journal->title }}" style="height: 300px; object-fit: cover;" />
+            <div class="p-2">
+              <article class="card item">
+              <div class="card-img">
+                <img src="{{ asset('storage/' . $journal->image) }}" alt="{{ $journal->title }}" />
+              </div>
               <div class="meta">
                 <div class="tag">{{ $journal->tag }}</div>
                 <h4 style="margin:10px 0 4px">{{ $journal->title }}</h4>
@@ -188,6 +268,7 @@
                 @endif
               </div>
             </article>
+            </div>
           @endforeach
         </div>
       @else
@@ -214,30 +295,35 @@
       </div>
     </section>
 
-    <!-- Gallery - داده‌ها از دیتابیس -->
-    <section id="gallery" class="section">
-      <h3>گالری تصاویر</h3>
-      @if($galleries->count() > 0)
-        <div class="owl-carousel gallery" id="galleryOwl">
-          @foreach($galleries as $index => $gallery)
-            <div class="item" data-index="{{ $index }}">
-              <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->alt ?? 'تصویر گالری' }}"/>
-            </div>
-          @endforeach
+   <!-- Gallery - داده‌ها از دیتابیس -->
+<section id="gallery" class="section">
+  <h3>گالری تصاویر</h3>
+  @if($galleries->count() > 0)
+    <div class="owl-carousel gallery" id="galleryOwl">
+      @foreach($galleries as $index => $gallery)
+        <div class="item" 
+             data-index="{{ $index }}"
+             data-description="{{ $gallery->description ?? '' }}">
+          <img src="{{ asset('storage/' . $gallery->image) }}" 
+               alt="{{ $gallery->alt ?? 'تصویر گالری' }}"/>
         </div>
-      @else
-        <p class="muted">هنوز تصویری در گالری اضافه نشده است.</p>
-      @endif
-    </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
-      <button class="close">✕</button>
-      <button class="prev">❮</button>
-      <img alt="" />
-      <button class="next">❯</button>
-      <div class="counter" id="lbCounter"></div>
+      @endforeach
     </div>
+  @else
+    <p class="muted">هنوز تصویری در گالری اضافه نشده است.</p>
+  @endif
+</section>
+
+<!-- Lightbox - به‌روزرسانی شده برای نمایش توضیحات -->
+<div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+  <button class="close">✕</button>
+  <button class="prev">❮</button>
+  <img alt="" />
+  <button class="next">❯</button>
+  <div class="counter" id="lbCounter"></div>
+  <!-- اضافه کردن بخش توضیحات -->
+  <div class="description" id="lbDescription"></div>
+</div>
 
     <!-- Contact -->
     <section id="contact" class="section">
@@ -296,8 +382,9 @@
     });
 
     $('.journals-carousel').owlCarousel({
-      loop:true, rtl:true, margin:12, autoplay:true, autoplayTimeout:4000, autoplayHoverPause:true,
+      rtl:true, margin:12, autoplay:true, autoplayTimeout:4000, autoplayHoverPause:true,
       dots:true, nav:true, navText:["❮","❯"],
+      // loop:true,
       responsive:{0:{items:1},600:{items:2},1000:{items:4}}
     });
 
@@ -308,43 +395,63 @@
       responsive:{0:{items:1},600:{items:2},1000:{items:3}}
     });
 
-    // Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = lightbox.querySelector('img');
-    const lbCounter = document.getElementById('lbCounter');
-    const closeBtn = lightbox.querySelector('.close');
-    const prevBtn = lightbox.querySelector('.prev');
-    const nextBtn = lightbox.querySelector('.next');
+ const lightbox = document.getElementById('lightbox');
+const lbImg = lightbox.querySelector('img');
+const lbCounter = document.getElementById('lbCounter');
+const lbDescription = document.getElementById('lbDescription');
+const closeBtn = lightbox.querySelector('.close');
+const prevBtn = lightbox.querySelector('.prev');
+const nextBtn = lightbox.querySelector('.next');
 
-    const galleryItems = Array.from(document.querySelectorAll('#galleryOwl .owl-item:not(.cloned) .item img'));
-    let current = 0;
+const galleryItems = Array.from(document.querySelectorAll('#galleryOwl .owl-item:not(.cloned) .item img'));
+const galleryData = Array.from(document.querySelectorAll('#galleryOwl .owl-item:not(.cloned) .item'));
+let current = 0;
 
-    function openLightbox(i){
-      current = (i + galleryItems.length) % galleryItems.length;
-      const img = galleryItems[current];
-      lbImg.src = img.src; lbImg.alt = img.alt || '';
-      lbCounter.textContent = `${current+1} / ${galleryItems.length}`;
-      lightbox.classList.add('open');
-    }
-    function closeLightbox(){ lightbox.classList.remove('open'); }
-    function next(){ openLightbox(current+1); }
-    function prev(){ openLightbox(current-1); }
+function openLightbox(i){
+  current = (i + galleryData.length) % galleryData.length;
+  const img = galleryItems[current];
+  const data = galleryData[current];
+  const description = data.getAttribute('data-description') || '';
+  
+  lbImg.src = img.src; 
+  lbImg.alt = img.alt || '';
+  lbCounter.textContent = `${current+1} / ${galleryItems.length}`;
+  lbDescription.textContent = description;
+  
+  lightbox.classList.add('open');
+}
 
-    $gallery.on('click', '.item', function(){
-      const idx = parseInt(this.getAttribute('data-index')) || 0;
-      openLightbox(idx);
-    });
+function closeLightbox(){ 
+  lightbox.classList.remove('open'); 
+}
 
-    closeBtn.addEventListener('click', closeLightbox);
-    nextBtn.addEventListener('click', next);
-    prevBtn.addEventListener('click', prev);
-    window.addEventListener('keydown', (e)=>{
-      if(!lightbox.classList.contains('open')) return;
-      if(e.key === 'Escape') closeLightbox();
-      if(e.key === 'ArrowRight') next();
-      if(e.key === 'ArrowLeft') prev();
-    });
-    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+function next(){ 
+  openLightbox(current+1); 
+}
+
+function prev(){ 
+  openLightbox(current-1); 
+}
+
+$gallery.on('click', '.item', function(){
+  const idx = parseInt(this.getAttribute('data-index')) || 0;
+  openLightbox(idx);
+});
+
+closeBtn.addEventListener('click', closeLightbox);
+nextBtn.addEventListener('click', next);
+prevBtn.addEventListener('click', prev);
+
+window.addEventListener('keydown', (e)=>{
+  if(!lightbox.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowRight') next();
+  if(e.key === 'ArrowLeft') prev();
+});
+
+lightbox.addEventListener('click', (e)=>{ 
+  if(e.target === lightbox) closeLightbox(); 
+});
   </script>
 </body>
 </html>

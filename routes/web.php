@@ -7,11 +7,17 @@ use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\BoardMemberController;
+use App\Http\Controllers\BoardMembersController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// صفحه عمومی اعضای هیئت مدیره
+Route::get('/board-members', [BoardMembersController::class, 'index'])->name('board-members');
 
 require __DIR__.'/auth.php';
 
@@ -32,6 +38,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // داشبورد
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // مدیریت منوها
+    Route::resource('menus', MenuController::class);
+    Route::post('menus/{menu}/toggle', [MenuController::class, 'toggleStatus'])->name('menus.toggle');
+    
+    // مدیریت اعضای هیئت مدیره
+    Route::resource('board-members', BoardMemberController::class);
     
     // مدیریت اسلایدرها
     Route::resource('sliders', SliderController::class);
