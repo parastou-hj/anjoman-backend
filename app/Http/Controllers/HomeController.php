@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // خواندن داده‌ها از دیتابیس
+       
         $sliders = Slider::where('is_active', true)
                         ->orderBy('order')
                         ->get();
@@ -32,7 +32,7 @@ class HomeController extends Controller
                    ->take(6)
                    ->get();
 
-        // خواندن منوهای فعال از دیتابیس
+        
         $menus = Menu::getMainMenusWithChildren();
 
         return view('home', compact('sliders', 'journals', 'galleries', 'news', 'menus'));

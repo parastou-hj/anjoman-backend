@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    // نمایش لیست
+ 
     public function index()
     {
         $menus = Menu::with('parent')
@@ -19,7 +19,7 @@ class MenuController extends Controller
         return view('admin.menus.index', compact('menus'));
     }
 
-    // فرم ایجاد
+    
     public function create()
     {
         $parentMenus = Menu::whereNull('parent_id')
@@ -30,7 +30,7 @@ class MenuController extends Controller
         return view('admin.menus.create', compact('parentMenus'));
     }
 
-    // ذخیره در دیتابیس
+    
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -48,7 +48,7 @@ class MenuController extends Controller
             ->with('success', 'منو با موفقیت ایجاد شد');
     }
 
-    // فرم ویرایش
+   
     public function edit(Menu $menu)
     {
         $parentMenus = Menu::whereNull('parent_id')
@@ -60,7 +60,7 @@ class MenuController extends Controller
         return view('admin.menus.edit', compact('menu', 'parentMenus'));
     }
 
-    // بروزرسانی
+   
     public function update(Request $request, Menu $menu)
     {
         $validated = $request->validate([
@@ -72,7 +72,7 @@ class MenuController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        // جلوگیری از اینکه منو والد خودش باشد
+      
         if ($validated['parent_id'] == $menu->id) {
             return back()->withErrors(['parent_id' => 'منو نمی‌تواند والد خودش باشد']);
         }
@@ -86,7 +86,7 @@ class MenuController extends Controller
     // حذف
     public function destroy(Menu $menu)
     {
-        // بررسی اینکه آیا فرزند دارد یا نه
+       
         if ($menu->children()->count() > 0) {
             return back()->withErrors(['delete' => 'ابتدا منوهای فرعی را حذف کنید']);
         }
@@ -97,7 +97,7 @@ class MenuController extends Controller
             ->with('success', 'منو با موفقیت حذف شد');
     }
 
-    // تغییر سریع وضعیت
+   
     public function toggleStatus(Menu $menu)
     {
         $menu->update(['is_active' => !$menu->is_active]);

@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('galleries', function (Blueprint $table) {
-            // بررسی اینکه فیلد description وجود ندارد
             if (!Schema::hasColumn('galleries', 'description')) {
                 $table->text('description')->nullable()->after('alt');
             }

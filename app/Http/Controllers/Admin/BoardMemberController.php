@@ -9,20 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class BoardMemberController extends Controller
 {
-    // نمایش لیست
+    
     public function index()
     {
         $members = BoardMember::orderBy('order')->get();
         return view('admin.board-members.index', compact('members'));
     }
 
-    // فرم ایجاد
+   
     public function create()
     {
         return view('admin.board-members.create');
     }
 
-    // ذخیره در دیتابیس
+    
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -38,7 +38,7 @@ class BoardMemberController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        // آپلود تصویر
+      
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('board-members', 'public');
         }
@@ -49,13 +49,13 @@ class BoardMemberController extends Controller
             ->with('success', 'عضو هیئت مدیره با موفقیت اضافه شد');
     }
 
-    // فرم ویرایش
+    
     public function edit(BoardMember $boardMember)
     {
         return view('admin.board-members.edit', compact('boardMember'));
     }
 
-    // بروزرسانی
+   
     public function update(Request $request, BoardMember $boardMember)
     {
         $validated = $request->validate([
@@ -71,9 +71,9 @@ class BoardMemberController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        // اگر تصویر جدید آپلود شد
+     
         if ($request->hasFile('image')) {
-            // حذف تصویر قدیمی
+         
             if ($boardMember->image) {
                 Storage::disk('public')->delete($boardMember->image);
             }
@@ -86,10 +86,10 @@ class BoardMemberController extends Controller
             ->with('success', 'اطلاعات عضو هیئت مدیره بروزرسانی شد');
     }
 
-    // حذف
+  
     public function destroy(BoardMember $boardMember)
     {
-        // حذف تصویر
+        
         if ($boardMember->image) {
             Storage::disk('public')->delete($boardMember->image);
         }

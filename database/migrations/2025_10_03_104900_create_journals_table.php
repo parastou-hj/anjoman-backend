@@ -10,11 +10,11 @@ public function up()
 {
     Schema::create('journals', function (Blueprint $table) {
         $table->id();
-        $table->string('title');                    // نام مجله
-        $table->text('description')->nullable();    // توضیحات
-        $table->string('image');                    // تصویر جلد
-        $table->string('tag');                      // برچسب (علمی-پژوهشی، ...)
-        $table->string('link')->nullable();         // لینک مشاهده
+        $table->string('title');                
+        $table->text('description')->nullable();  
+        $table->string('image');                   
+        $table->string('tag');                     
+        $table->string('link')->nullable();        
         $table->boolean('is_active')->default(true);
         $table->timestamps();
     });

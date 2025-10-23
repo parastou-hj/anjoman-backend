@@ -10,10 +10,8 @@ class BoardMembersController extends Controller
 {
     public function index()
     {
-        // دریافت اعضای فعال هیئت مدیره
         $boardMembers = BoardMember::getActiveMembers();
         
-        // دریافت منوهای فعال برای navigation
         $menus = Menu::getMainMenusWithChildren();
 
         return view('board-members', compact('boardMembers', 'menus'));

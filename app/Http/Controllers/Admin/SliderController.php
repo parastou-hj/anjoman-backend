@@ -9,20 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
-    // نمایش لیست
+
     public function index()
     {
         $sliders = Slider::orderBy('order')->get();
         return view('admin.sliders.index', compact('sliders'));
     }
 
-    // فرم ایجاد
+   
     public function create()
     {
         return view('admin.sliders.create');
     }
 
-    // ذخیره در دیتابیس
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -33,7 +33,7 @@ class SliderController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        // آپلود تصویر
+       
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('sliders', 'public');
         }
@@ -44,13 +44,13 @@ class SliderController extends Controller
             ->with('success', 'اسلایدر با موفقیت ایجاد شد');
     }
 
-    // فرم ویرایش
+    
     public function edit(Slider $slider)
     {
         return view('admin.sliders.edit', compact('slider'));
     }
 
-    // بروزرسانی
+   
     public function update(Request $request, Slider $slider)
     {
         $validated = $request->validate([
@@ -61,9 +61,9 @@ class SliderController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        // اگر تصویر جدید آپلود شد
+      
         if ($request->hasFile('image')) {
-            // حذف تصویر قدیمی
+           
             if ($slider->image) {
                 Storage::disk('public')->delete($slider->image);
             }
@@ -76,10 +76,10 @@ class SliderController extends Controller
             ->with('success', 'اسلایدر با موفقیت بروزرسانی شد');
     }
 
-    // حذف
+   
     public function destroy(Slider $slider)
     {
-        // حذف تصویر
+      
         if ($slider->image) {
             Storage::disk('public')->delete($slider->image);
         }

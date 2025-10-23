@@ -11,7 +11,8 @@
   <!-- Owl Carousel -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
 
   <style>
@@ -29,6 +30,10 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
+    .logo{
+      width: 30px;
+      height:30px
+    }
     body{
       font-size:14px;
       margin:0; background:var(--bg); color:var(--text); font-family:'Vazirmatn', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.9}
@@ -45,34 +50,34 @@
     nav{position:relative}
     nav ul{display:flex; gap:6px; list-style:none; margin:0; padding:0}
     nav > ul > li{position:relative}
-    nav a{padding:10px 14px; border-radius:12px; font-weight:600; color:#0f1720; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease}
+    nav a{padding:10px 14px; border-radius:5px; font-weight:600; color:#0f1720; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease}
     nav a:hover{background:#eef6f4; color:var(--brand); box-shadow:0 2px 0 var(--brand) inset}
     .cta{background:var(--brand); color:#fff}
     .cta:hover{background:var(--brand-2); color:#fff; box-shadow:none}
 
-    .submenu{position:absolute; right:0; top:100%; min-width:220px; background:#fff; border:1px solid #eef1f4; border-radius:14px; box-shadow:var(--shadow); padding:6px; display:none}
-    .submenu a{display:block; padding:10px 12px; border-radius:10px; color:#233}
+    .submenu{position:absolute; right:0; top:100%; min-width:220px; background:#fff; border:1px solid #eef1f4; border-radius:5px; box-shadow:var(--shadow); padding:6px; display:none}
+    .submenu a{display:block; padding:10px 12px; border-radius:5px; color:#233}
     .submenu a:hover{background:#f2faf8; color:var(--brand)}
     li.has-submenu:focus-within > .submenu, li.has-submenu:hover > .submenu{display:block}
 
-    .menu-btn{display:none; border:none; background:#fff; width:42px; height:42px; border-radius:12px; box-shadow:var(--shadow)}
+    .menu-btn{display:none; border:none; background:#fff; width:42px; height:42px; border-radius:5px; box-shadow:var(--shadow)}
 
     .welcome{margin:14px auto 0}
-    .welcome .box{background:#fff; border:1px solid #e7f0ed; border-radius:16px; padding:18px; box-shadow:var(--shadow)}
+    .welcome .box{background:#fff; border:1px solid #e7f0ed; border-radius:5px; padding:18px; box-shadow:var(--shadow)}
     .welcome h1{font-size:clamp(18px,2.6vw,24px); margin:0 0 10px 0; line-height:1.8}
     .welcome .highlight{display:inline-block; background:linear-gradient(transparent 60%, #e1f6ef 60%);}    
     .welcome p{margin:0; color:#334}
 
     .hero{margin-top:16px}
-    .hero .item{position:relative; height:56vh; max-height:680px; border-radius:16px; overflow:hidden}
-    .hero .item img{width:100%; height:100%; object-fit:cover;border-radius:16px}
+    .hero .item{position:relative; height:56vh; max-height:680px; border-radius:5px; overflow:hidden}
+    .hero .item img{width:100%; height:100%; object-fit:cover;border-radius:5px}
     .caption{position:absolute; inset:auto 0 0 0; padding:24px; background:linear-gradient(180deg,rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%); color:#fff}
     .caption h2{margin:0 0 6px 0; font-size:clamp(18px,3vw,28px)}
 
     .section{padding:56px 0}
     .section h3{font-size:clamp(18px,2.6vw,28px); margin:0 0 18px 0}
 
-    .card{background:var(--card); border:1px solid #eef1f4; border-radius:18px; overflow:hidden;}
+    .card{background:var(--card); border:1px solid #eef1f4; border-radius:5px; overflow:hidden;}
     .card .meta{padding:12px 14px}
     .card img{
       height:100%;
@@ -94,15 +99,15 @@
     .about{display:grid; grid-template-columns: 1.2fr 1fr; gap:24px; align-items:center}
     .about p{color:var(--muted)}
     .about .highlights{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px}
-    .pill{background:#fff7e6; color:#a35a00; padding:10px 12px; border-radius:12px; border:1px solid #ffe2a6; font-weight:700; text-align:center}
+    .pill{background:#fff7e6; color:#a35a00; padding:10px 12px; border-radius:5px; border:1px solid #ffe2a6; font-weight:700; text-align:center}
 
-    .gallery .item{border-radius:16px; overflow:hidden; border:1px solid #eef1f4; cursor:pointer;height: 220px;}
+    .gallery .item{border-radius:5px; overflow:hidden; border:1px solid #eef1f4; cursor:pointer;height: 220px;}
     .gallery .item img{width:100%; height:100%; object-fit:cover;}
 
     .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; padding:20px; z-index:80}
     .lightbox.open{display:flex}
-    .lightbox img{max-width:96%; max-height:92vh; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,.35)}
-    .lightbox .close, .lightbox .prev, .lightbox .next{position:absolute; top:16px; border:none; background:#fff; color:#111; padding:8px 12px; border-radius:10px}
+    .lightbox img{max-width:96%; max-height:92vh; border-radius:5px; box-shadow:0 20px 40px rgba(0,0,0,.35)}
+    .lightbox .close, .lightbox .prev, .lightbox .next{position:absolute; top:16px; border:none; background:#fff; color:#111; padding:8px 12px; border-radius:5px}
     .lightbox .close{right:16px}
     .lightbox .prev, .lightbox .next{top:50%; transform:translateY(-50%)}
     .lightbox .prev{right:16px}
@@ -144,7 +149,7 @@
     @media (max-width: 960px){.about{grid-template-columns:1fr} .footer-grid{grid-template-columns:1fr 1fr}}
     @media (max-width: 720px){
       .menu-btn{display:block}
-      nav{position:fixed; inset:64px 14px auto 14px; background:#fff; border:1px solid #eef1f4; border-radius:16px; box-shadow:var(--shadow); padding:8px; display:none}
+      nav{position:fixed; inset:64px 14px auto 14px; background:#fff; border:1px solid #eef1f4; border-radius:5px; box-shadow:var(--shadow); padding:8px; display:none}
       nav.open{display:block}
       nav ul{flex-direction:column}
       .footer-grid{grid-template-columns:1fr}
@@ -227,7 +232,7 @@
         </div>
       @empty
         <div class="item">
-          <img src="https://via.placeholder.com/1200x600/246b5f/ffffff?text=اسلایدر+پیش‌فرض" alt="پیش‌فرض" />
+          <img  class='logo' src="https://via.placeholder.com/1200x600/246b5f/ffffff?text=اسلایدر+پیش‌فرض" alt="پیش‌فرض" />
           <div class="caption">
             <h2>به انجمن علمی توسعه روستایی خوش آمدید</h2>
             <p>لطفاً از پنل مدیریت اسلایدر اضافه کنید</p>
@@ -239,9 +244,13 @@
     <!-- Welcome -->
     <section class="welcome">
       <div class="container box">
-        <h1><span class="highlight">به سایت انجمن علمی جغرافیا و برنامه‌ریزی روستایی ایران خوش آمدید</span></h1>
+        <h1><span class="">به سایت انجمن علمی جغرافیا و برنامه‌ریزی روستایی ایران خوش آمدید</span></h1>
         <p>
-          این پایگاه اینترنتی با هدف اطلاع‌رسانی از برنامه‌های انجمن و برقراری ارتباط بین اعضا، شاخه‌های وابسته، کمیته‌های مطالعات و سایر مراکز مرتبط با انجمن راه‌اندازی شده است.
+          این پایگاه با هدف گسترش ارتباطات علمی، اطلاع‌رسانی فعالیت‌ها و برنامه‌های انجمن، و ایجاد بستری برای تعامل میان اعضا، شاخه‌های استانی، کمیته‌های تخصصی و سایر مراکز علمی و اجرایی مرتبط با موضوعات روستایی راه‌اندازی شده است.
+
+انجمن علمی جغرافیا و برنامه‌ریزی روستایی ایران از کلیه اساتید دانشگاه‌ها، پژوهشگران، مدیران سازمان‌های مرتبط، کارشناسان، دانشجویان و علاقه‌مندان حوزه‌های توسعه و برنامه‌ریزی روستایی، کشاورزی، ترویج و جامعه‌شناسی دعوت می‌نماید تا با بازدید از بخش‌های مختلف این پایگاه، ضمن آشنایی با فعالیت‌ها و اهداف انجمن، از آخرین اخبار، نشست‌های تخصصی، همایش‌ها و مقالات منتشرشده در نشریات انجمن بهره‌مند شوند.
+
+همچنین از شما بازدیدکنندگان گرامی درخواست می‌شود پیشنهادات و دیدگاه‌های ارزشمند خود را جهت بهبود و غنای محتوای این پایگاه از طریق بخش «تماس با ما» با مدیر سایت در میان بگذارید.
         </p>
       </div>
     </section>
@@ -253,21 +262,23 @@
         <div class="owl-carousel journals-carousel">
           @foreach($journals as $journal)
             <div class="p-2">
-              <article class="card item">
-              <div class="card-img">
-                <img src="{{ asset('storage/' . $journal->image) }}" alt="{{ $journal->title }}" />
-              </div>
-              <div class="meta">
-                <div class="tag">{{ $journal->tag }}</div>
-                <h4 style="margin:10px 0 4px">{{ $journal->title }}</h4>
-                @if($journal->description)
-                  <p class="muted" style="font-size: 14px;">{{ Str::limit($journal->description, 80) }}</p>
-                @endif
-                @if($journal->link)
-                  <a class="muted" href="{{ $journal->link }}" target="_blank">مشاهده شماره‌ها ↗</a>
-                @endif
-              </div>
-            </article>
+              @if($journal->link)
+              <a class="card item" href="{{ $journal->link }}"  target="_blank">
+                <div class="card-img">
+                  <img src="{{ asset('storage/' . $journal->image) }}" alt="{{ $journal->title }}" />
+                </div>
+                <div class="meta">
+                  <div class="tag">{{ $journal->tag }}</div>
+                  <h4 style="margin:10px 0 4px">{{ $journal->title }}</h4>
+                  @if($journal->description)
+                    <p class="muted" style="font-size: 14px;">{{ Str::limit($journal->description, 80) }}</p>
+                  @endif
+                  
+                    <span class="muted" >مشاهده شماره‌ها ↗</span>
+                
+                </div>
+              </a>
+              @endif
             </div>
           @endforeach
         </div>
@@ -326,12 +337,12 @@
 </div>
 
     <!-- Contact -->
-    <section id="contact" class="section">
+    <!-- <section id="contact" class="section">
       <div class="card" style="padding:18px">
         <h3>ارتباط با ما</h3>
         <p class="muted">ایمیل: info@rural-dev.ir — تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
       </div>
-    </section>
+    </section> -->
   </main>
 
   <!-- Footer -->
@@ -382,7 +393,7 @@
     });
 
     $('.journals-carousel').owlCarousel({
-      rtl:true, margin:12, autoplay:true, autoplayTimeout:4000, autoplayHoverPause:true,
+      rtl:true,  autoplay:true, autoplayTimeout:4000, autoplayHoverPause:true,
       dots:true, nav:true, navText:["❮","❯"],
       // loop:true,
       responsive:{0:{items:1},600:{items:2},1000:{items:4}}
