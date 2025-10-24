@@ -79,6 +79,12 @@
             <a href="{{ route('admin.sliders.index') }}" class="{{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
                 🖼️ مدیریت اسلایدرها
             </a>
+            <a href="{{ route('admin.welcome.edit') }}" class="{{ request()->routeIs('admin.welcome.*') ? 'active' : '' }}">
+                🙌 مدیریت خوشامدگویی
+            </a>
+            <a href="{{ route('admin.pages.index') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
+                📄 صفحات داخلی
+            </a>
             <a href="{{ route('admin.journals.index') }}" class="{{ request()->routeIs('admin.journals.*') ? 'active' : '' }}">
                 📚 مدیریت نشریات
             </a>

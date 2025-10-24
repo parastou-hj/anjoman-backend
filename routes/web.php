@@ -10,11 +10,17 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\BoardMemberController;
 use App\Http\Controllers\BoardMembersController;
+use App\Http\Controllers\Admin\WelcomeController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
+
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show');
 
 // صفحه عمومی اعضای هیئت مدیره
 Route::get('/board-members', [BoardMembersController::class, 'index'])->name('board-members');
@@ -48,6 +54,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // مدیریت اسلایدرها
     Route::resource('sliders', SliderController::class);
+
+      // مدیریت بخش خوشامدگویی
+    Route::get('welcome', [WelcomeController::class, 'edit'])->name('welcome.edit');
+    Route::put('welcome', [WelcomeController::class, 'update'])->name('welcome.update');
+
+     // مدیریت صفحات داخلی
+    Route::post('pages/upload-image', [AdminPageController::class, 'uploadImage'])->name('pages.upload-image');
+    Route::resource('pages', AdminPageController::class)->except(['show']);
     
     // مدیریت نشریات
     Route::resource('journals', JournalController::class);

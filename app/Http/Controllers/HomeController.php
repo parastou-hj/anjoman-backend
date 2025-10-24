@@ -7,7 +7,8 @@ use App\Models\Journal;
 use App\Models\Gallery;
 use App\Models\News;
 use App\Models\Menu;
-use Illuminate\Http\Request;
+use App\Models\Welcome;
+
 
 class HomeController extends Controller
 {
@@ -35,6 +36,8 @@ class HomeController extends Controller
         
         $menus = Menu::getMainMenusWithChildren();
 
-        return view('home', compact('sliders', 'journals', 'galleries', 'news', 'menus'));
+         $welcome = Welcome::first();
+
+        return view('home', compact('sliders', 'journals', 'galleries', 'news', 'menus', 'welcome'));
     }
 }

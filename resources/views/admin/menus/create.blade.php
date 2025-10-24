@@ -23,6 +23,21 @@
                 برای منوهای والد که فقط زیرمنو دارند، می‌توانید خالی بگذارید.
             </small>
         </div>
+         @if($pages->count())
+        <div class="form-group">
+            <label>یا انتخاب از صفحات داخلی</label>
+            <select id="page-selector" class="form-control">
+                <option value="">-- انتخاب صفحه --</option>
+                @foreach($pages as $page)
+                    <option value="{{ '/pages/' . $page->slug }}">
+                        {{ $page->title }}{{ $page->is_published ? '' : ' (پیش‌نویس)' }}
+                    </option>
+                @endforeach
+            </select>
+            <small style="color: #666;">با انتخاب صفحه، لینک آن به صورت خودکار در فیلد بالا قرار می‌گیرد.</small>
+        </div>
+        @endif
+
 
         <div class="form-group">
             <label>نحوه باز شدن لینک *</label>
@@ -66,3 +81,20 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selector = document.getElementById('page-selector');
+        const urlInput = document.querySelector('input[name="url"]');
+
+        if (selector && urlInput) {
+            selector.addEventListener('change', function () {
+                if (this.value) {
+                    urlInput.value = this.value;
+                }
+            });
+        }
+    });
+</script>
+@endpush
