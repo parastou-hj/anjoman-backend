@@ -51,38 +51,36 @@
             toolbar: 'undo redo | bold italic underline | alignright aligncenter alignleft alignjustify | bullist numlist outdent indent | link image media table | removeformat fullscreen code',
             menubar: 'file edit view insert format tools table help',
             content_style: 'body { font-family: Vazirmatn, sans-serif; line-height: 2; }',
-            images_upload_handler: function (blobInfo, success, failure) {
-                const xhr = new XMLHttpRequest();
-                xhr.withCredentials = true;
-                xhr.open('POST', '{{ route('admin.pages.upload-image') }}');
-                xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            images_upload_handler: function (blobInfo) {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
 
-                xhr.onload = function() {
-                    if (xhr.status !== 200) {
-                        failure('خطا در آپلود تصویر: ' + xhr.responseText);
-                        return;
-                    }
-
-                    const json = JSON.parse(xhr.responseText);
-
-                    if (!json || typeof json.location !== 'string') {
-                        failure('پاسخ نامعتبر از سرور');
-                        return;
-                    }
-
-                    success(json.location);
-                };
-
-                xhr.onerror = function() {
-                    failure('امکان برقراری ارتباط با سرور وجود ندارد.');
-                };
-
-                const formData = new FormData();
-                formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-                xhr.send(formData);
-            }
+        fetch('{{ route('admin.pages.upload-image') }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('خطای سرور (' + response.status + ')');
+                }
+                return response.json();
+            })
+            .then(json => {
+                if (json?.location) {
+                    resolve(json.location);
+                } else {
+                    reject('پاسخ نامعتبر از سرور');
+                }
+            })
+            .catch(error => reject(error.message));
+    });
+}
         });
     });
 </script>
