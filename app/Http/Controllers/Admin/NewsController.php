@@ -3,9 +3,9 @@
  namespace App\Http\Controllers\Admin;
  
  use App\Http\Controllers\Controller;
-+use App\Models\News;
+use App\Models\News;
  use Illuminate\Http\Request;
-+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
  
  class NewsController extends Controller
  {
@@ -31,6 +31,7 @@
      public function store(Request $request)
      {
 
+
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
@@ -40,9 +41,10 @@
         ]);
  
 
+
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('news', 'public');
-       }
+        }
 
         $validated['is_active'] = $request->boolean('is_active');
 
@@ -54,12 +56,14 @@
      }
  
 
+
     public function edit(News $news)
      {
 
         return view('admin.news.edit', compact('news'));
      }
  
+
 
     public function update(Request $request, News $news)
      {
@@ -86,7 +90,7 @@
 
         return redirect()
             ->route('admin.news.index')
-            ->with('success', 'خبر با موفقیت بروزرسانی شد');
+           ->with('success', 'خبر با موفقیت بروزرسانی شد');
      }
  
 
@@ -99,8 +103,8 @@
 
         $news->delete();
 
-       return redirect()
-           ->route('admin.news.index')
+        return redirect()
+            ->route('admin.news.index')
            ->with('success', 'خبر با موفقیت حذف شد');
      }
  }

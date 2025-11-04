@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\GalleryController;
-use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\BoardMemberController;
@@ -18,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\NewsController as FrontNewsController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show');
+Route::get('/news', [FrontNewsController::class, 'index'])->name('news.index');
 
 // صفحه عمومی اعضای هیئت مدیره
 Route::get('/board-members', [BoardMembersController::class, 'index'])->name('board-members');
@@ -69,8 +72,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // مدیریت گالری
     Route::resource('galleries', GalleryController::class);
     
+     
     // مدیریت اخبار
-    Route::resource('news', NewsController::class);
+
+    Route::resource('news', AdminNewsController::class);
     
     // مدیریت پیام‌ها
     Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);

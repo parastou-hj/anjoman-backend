@@ -1,11 +1,9 @@
-
- <?php
- 
+<?php
  namespace App\Models;
 
  
 use Illuminate\Database\Eloquent\Factories\HasFactory;
- use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
  
  class News extends Model
  {
@@ -13,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
     use HasFactory;
 
     protected $fillable = [
-        'title',
+       'title',
         'content',
         'image',
         'published_at',
@@ -25,3 +23,4 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
         'published_at' => 'date',
     ];
  }
+ 
