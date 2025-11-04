@@ -49,5 +49,7 @@ Homestead.yaml
 # همه فایل‌های پوشه database نادیده گرفته می‌شوند،
 # به جز فایل database.sqlite
 /database/*
-!database/database.sqlite
+!database/migrations/
+!database/seeders/
+!database/factories/
 # ---------------------------------------
