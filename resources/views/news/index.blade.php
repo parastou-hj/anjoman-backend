@@ -7,6 +7,8 @@
     <meta name="description" content="آخرین اخبار و اطلاعیه‌های انجمن علمی توسعه روستایی" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -250,9 +252,9 @@
     </div>
 
     @if($newsItems->count())
-        <section class="news-grid">
+        <section class="row">
             @foreach($newsItems as $news)
-                <article class="news-card">
+                <article class="news-card col-lg-3">
                     <div class="news-image">
                         @if($news->image)
                             <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">

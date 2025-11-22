@@ -1,0 +1,38 @@
+     .container {
+            /* max-width: 960px;
+            margin: 0 auto;
+            padding: 30px 18px 80px; */
+        }
+        .page-card {
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        .page-card h1 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: clamp(20px, 2.8vw, 32px);
+            color: var(--brand-2);
+        }
+        .page-meta {
+            margin-bottom: 28px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+        .page-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(15,63,55,0.1);
+        }
+        .page-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .page-content table th,
+        .page-content table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+        }

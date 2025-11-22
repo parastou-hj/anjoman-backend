@@ -15,18 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->longText('body')->nullable(); // HTML content
-            $table->text('excerpt')->nullable();
-            $table->string('meta_title')->nullable();
-            $table->text('meta_description')->nullable();
-            $table->enum('status', ['draft', 'published'])->default('draft');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->datetime('published_at')->nullable();
+            $table->longText('content');
+            $table->boolean('is_published')->default(true);
             $table->timestamps();
-            
-            // Indexes
-            $table->index('status');
-            $table->index('user_id');
         });
     }
 
