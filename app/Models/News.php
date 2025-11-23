@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
     protected $fillable = [
        'title',
+        'description',
         'content',
         'image',
         'published_at',
@@ -23,4 +24,3 @@ use Illuminate\Database\Eloquent\Model;
         'published_at' => 'date',
     ];
  }
- 

@@ -27,6 +27,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show');
 Route::get('/news', [FrontNewsController::class, 'index'])->name('news.index');
 
+Route::get('/news/{news}', [FrontNewsController::class, 'show'])->name('news.show');
+
 // صفحه عمومی اعضای هیئت مدیره
 Route::get('/board-members', [BoardMembersController::class, 'index'])->name('board-members');
 

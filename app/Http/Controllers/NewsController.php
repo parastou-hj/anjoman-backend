@@ -18,4 +18,15 @@ class NewsController extends Controller
 
         return view('news.index', compact('newsItems', 'menus'));
     }
+
+    public function show(News $news)
+    {
+        if (!$news->is_active) {
+            abort(404);
+        }
+
+        $menus = Menu::getMainMenusWithChildren();
+
+        return view('news.show', compact('news', 'menus'));
+    }
 }

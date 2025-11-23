@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Storage;
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:500'],
             'content' => ['required', 'string'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'published_at' => ['required', 'date'],
@@ -70,6 +71,7 @@ use Illuminate\Support\Facades\Storage;
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:500'],
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'published_at' => ['required', 'date'],

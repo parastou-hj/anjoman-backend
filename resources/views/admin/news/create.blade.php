@@ -15,9 +15,17 @@
         </div>
 
         <div class="form-group">
-            <label>متن خبر *</label>
-            <textarea name="content" class="form-control" rows="6" required>{{ old('content') }}</textarea>
-            @error('content')<span style="color: red;">{{ $message }}</span>@enderror
+            <label>توضیح کوتاه (برای لیست اخبار) *</label>
+            <textarea name="description" class="form-control" rows="3" placeholder="توضیح کوتاهی درباره خبر (حداکثر 500 کاراکتر)" maxlength="500" required>{{ old('description') }}</textarea>
+            <small style="color: #666;">برای نمایش در لیست اخبار</small>
+            @error('description')<span style="color: red;">{{ $message }}</span>@enderror
+        </div>
+
+        <div class="form-group">
+            <label>محتوای کامل خبر *</label>
+            <textarea name="content" class="form-control tinymce-editor" rows="15">{{ old('content') }}</textarea>
+            <small style="color: #666;">محتوای تکمیلی برای صفحه خبر تکی</small>
+            @error('content')<span style="color: red; display:block;">{{ $message }}</span>@enderror
         </div>
 
         <div class="form-group">
@@ -25,11 +33,6 @@
             <input type="file" name="image" class="form-control" accept="image/*" required>
             @error('image')<span style="color: red;">{{ $message }}</span>@enderror
         </div>
-        <div class="form-group">
-    <label>محتوا *</label>
-    <textarea name="content" class="form-control tinymce-editor" rows="15">{{ old('content', $pageInstance->content ?? '') }}</textarea>
-    @error('content')<span style="color: red; display:block;">{{ $message }}</span>@enderror
-</div>
 
         <div class="form-group">
             <label>تاریخ انتشار *</label>
