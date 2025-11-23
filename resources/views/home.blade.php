@@ -3,7 +3,7 @@
 @section('title', 'صفحه اصلی') 
 @section('content')
   <div id="hero" class="">
-    <!-- Hero Slider - داده‌ها از دیتابیس -->
+ 
     <section class="owl-carousel hero-carousel hero" aria-roledescription="carousel" aria-label="اسلایدر تصاویر">
       @forelse($sliders as $slider)
         <div class="item">
@@ -26,7 +26,7 @@
       @endforelse
     </section>
 
-    <!-- Welcome -->
+ 
     <section class="welcome">
       <div class="container box">
        <h1><span class="highlight">{{ optional($welcome)->title ?? 'به سایت انجمن علمی جغرافیا و برنامه‌ریزی روستایی ایران خوش آمدید' }}</span></h1>
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-    <!-- Journals - داده‌ها از دیتابیس -->
+    
     <section id="journals" class="journal-sec section">
       <h3>نشریات و مجلات انجمن</h3>
       @if($journals->count() > 0)
@@ -68,7 +68,7 @@
       @endif
     </section>
 
-    <!-- About Us -->
+   
     <section id="about" class="section">
       <div class="about">
         <div>
@@ -87,7 +87,7 @@
       </div>
     </section>
 
-   <!-- Gallery - داده‌ها از دیتابیس -->
+
 <section id="gallery" class="section">
   <h3>گالری تصاویر</h3>
   @if($galleries->count() > 0)
@@ -106,7 +106,6 @@
   @endif
 </section>
 
-<!-- Lightbox - به‌روزرسانی شده برای نمایش توضیحات -->
 <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
   <button class="close">✕</button>
   <button class="prev">❮</button>
@@ -126,7 +125,7 @@
     </section> -->
   </div>
 
-  <!-- Footer -->
+  
 @endsection
 
   

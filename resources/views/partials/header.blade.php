@@ -36,7 +36,7 @@
             </li>
           @endforeach
 
-        
+          {{-- دکمه عضویت --}}
           <li><a class="cta" href="{{ route('admin.register.form') }}">عضویت در انجمن</a></li>
 
           @auth

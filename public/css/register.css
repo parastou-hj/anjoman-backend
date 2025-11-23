@@ -1,0 +1,11 @@
+.card {border-radius:10px}
+.form-label .required{color:#e03131;margin-left:6px}
+.captcha-img{height:56px;object-fit:cover;border:1px solid #e9ecef;border-radius:6px}
+.save-btn{background:#11c24d;border:0}
+.divider{height:1px;background:#eee;margin:18px 0}
+/* inputs with rounded small border like the screenshot */
+.form-control, .form-select, .form-control:focus{border-radius:6px;border:1px solid #e6e6e6;box-shadow:none}
+.card-body .col-md-12 {margin-bottom:12px}
+@media (min-width:992px){
+.form-row > .col-md-4,.form-row > .col-md-3{padding-right:8px;padding-left:8px}
+}

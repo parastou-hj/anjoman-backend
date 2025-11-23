@@ -25,6 +25,11 @@
             <input type="file" name="image" class="form-control" accept="image/*" required>
             @error('image')<span style="color: red;">{{ $message }}</span>@enderror
         </div>
+        <div class="form-group">
+    <label>محتوا *</label>
+    <textarea name="content" class="form-control tinymce-editor" rows="15">{{ old('content', $pageInstance->content ?? '') }}</textarea>
+    @error('content')<span style="color: red; display:block;">{{ $message }}</span>@enderror
+</div>
 
         <div class="form-group">
             <label>تاریخ انتشار *</label>
@@ -44,3 +49,55 @@
     </form>
 </div>
 @endsection
+@push('scripts')
+<script src="https://cdn.tiny.cloud/1/e2542kfm6llf9xmph6r2dju04ra2ij7ij4soorfhx99axcet/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.tinymce?.editors?.length) {
+            tinymce.remove();
+        }
+
+        tinymce.init({
+            selector: 'textarea.tinymce-editor',
+            language: 'fa',
+            language_url: 'https://cdn.tiny.cloud/1/e2542kfm6llf9xmph6r2dju04ra2ij7ij4soorfhx99axcet/tinymce/6/langs/fa.js',
+            directionality: 'rtl',
+            height: 500,
+            plugins: 'advlist autolink lists link image media table code fullscreen',
+            toolbar: 'undo redo | bold italic underline | alignright aligncenter alignleft alignjustify | bullist numlist outdent indent | link image media table | removeformat fullscreen code',
+            menubar: 'file edit view insert format tools table help',
+            content_style: 'body { font-family: Vazirmatn, sans-serif; line-height: 2; }',
+            images_upload_handler: function (blobInfo) {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+        fetch('{{ route('admin.pages.upload-image') }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('خطای سرور (' + response.status + ')');
+                }
+                return response.json();
+            })
+            .then(json => {
+                if (json?.location) {
+                    resolve(json.location);
+                } else {
+                    reject('پاسخ نامعتبر از سرور');
+                }
+            })
+            .catch(error => reject(error.message));
+    });
+}
+        });
+    });
+</script>
+@endpush

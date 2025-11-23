@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Registration;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 
 class RegisterController extends Controller
 {
 public function create() {
-return view('register.form');
+    $menus = Menu::getMainMenusWithChildren();
+return view('register.form', compact('menus'));
+
 }
 
 

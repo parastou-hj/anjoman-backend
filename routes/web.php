@@ -85,7 +85,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // فرم ثبت نام
     Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
-// Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
    Route::get('/registrations', [RegistrationAdminController::class, 'index'])
     ->name('registrations.index');

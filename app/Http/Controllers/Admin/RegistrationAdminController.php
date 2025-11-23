@@ -11,13 +11,13 @@ class RegistrationAdminController extends Controller
     public function index()
     {
         $items = Registration::latest()->paginate(20);
-        return view('admin.registrations.index', compact('items'));
+        return view('registrations.index', compact('items'));
     }
 
     
     public function show($id)
     {
         $item = Registration::findOrFail($id);
-        return view('admin.registrations.show', compact('item'));
+        return view('registrations.show', compact('item'));
     }
 }

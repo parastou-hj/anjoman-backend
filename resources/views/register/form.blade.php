@@ -1,42 +1,83 @@
 @extends('layouts.main')
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endpush
 @section('content')
 <div class="container">
-<h3 class="mb-3">فرم ثبت‌نام</h3>
+<option>حقوقی</option>
+</select>
+</div>
 
 
-@if(session('success'))
-<div class="alert alert-success">{{ session('success') }}</div>
-@endif
+<div class="col-md-4 mb-3">
+<label class="form-label">نام <span class="required">*</span></label>
+<input class="form-control">
+</div>
 
 
-{{-- <form method="POST" action="{{ route('register.store') }}"> --}}
-@csrf
+<div class="col-md-4 mb-3">
+<label class="form-label">نام خانوادگی <span class="required">*</span></label>
+<input class="form-control">
+</div>
 
 
-
-<input class="form-control mb-2" name="email" placeholder="ایمیل" />
-<input class="form-control mb-2" name="email_confirmation" placeholder="تکرار ایمیل" />
-
-
-<input class="form-control mb-2" name="username" placeholder="نام کاربری" />
-<input class="form-control mb-2" name="name" placeholder="نام" />
-<input class="form-control mb-2" name="family" placeholder="نام خانوادگی" />
-
-
-<input class="form-control mb-2" name="education" placeholder="تحصیلات" />
-<input class="form-control mb-2" name="rank" placeholder="رتبه علمی" />
+<div class="col-md-4 mb-3">
+<label class="form-label">تحصیلات <span class="required">*</span></label>
+<select class="form-select">
+<option>دیپلم</option>
+<option>لیسانس</option>
+<option>فوق لیسانس</option>
+</select>
+</div>
 
 
-<input class="form-control mb-2" name="phone" placeholder="شماره تلفن" />
-<input class="form-control mb-2" name="mobile" placeholder="تلفن همراه" />
-<input class="form-control mb-2" name="city" placeholder="شهر" />
+<div class="col-md-4 mb-3">
+<label class="form-label">رتبه علمی <span class="required">*</span></label>
+<select class="form-select">
+<option>بدون رتبه</option>
+<option>رتبه 1</option>
+</select>
+</div>
 
 
-<textarea class="form-control mb-2" name="address" placeholder="نشانی پستی"></textarea>
-<textarea class="form-control mb-2" name="organization" placeholder="وابستگی سازمانی"></textarea>
+<div class="col-md-4 mb-3">
+<label class="form-label">شماره تلفن <span class="required">*</span></label>
+<input class="form-control">
+</div>
 
 
-<button class="btn btn-success w-100">ثبت</button>
+<div class="col-md-4 mb-3">
+<label class="form-label">تلفن همراه <span class="required">*</span></label>
+<input class="form-control">
+</div>
+
+
+<div class="col-md-4 mb-3">
+<label class="form-label">شهر <span class="required">*</span></label>
+<input class="form-control">
+</div>
+
+
+<div class="col-md-8 mb-3">
+<label class="form-label">نشانی پستی <span class="required">*</span></label>
+<textarea class="form-control" rows="3"></textarea>
+</div>
+
+
+<div class="col-md-12 mb-3">
+<label class="form-label">وابستگی سازمانی <span class="required">*</span></label>
+<textarea class="form-control" rows="3"></textarea>
+</div>
+
+
+</div>
 </form>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
 </div>
 @endsection
