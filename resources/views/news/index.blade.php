@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div class="">
+<div class=" my-5">
     <div class="page-header">
         <h1>آخرین اخبار انجمن</h1>
         <p>اخبار، اطلاعیه‌ها و تازه‌ترین رویدادهای مرتبط با انجمن علمی توسعه روستایی ایران را اینجا دنبال کنید.</p>
@@ -20,8 +20,7 @@
                             @endif
                         </div>
                         <div class="news-body">
-                            <div class="news-date">
-                                 {{ \Morilog\Jalali\Jalalian::fromDateTime($news->published_at)->format('Y/m/d') }}</div>
+                            <div class="news-date">🗓 {{ \Morilog\Jalali\Jalalian::fromDateTime($news->published_at)->format('Y/m/d') }}</div>
                             <h2 class="news-title">{{ $news->title }}</h2>
                             <p class="news-excerpt">{{ $news->description }}</p>
                         </div>
