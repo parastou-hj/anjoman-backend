@@ -36,6 +36,9 @@
             </li>
           @endforeach
 
+        
+          <li><a class="cta" href="{{ route('admin.register.form') }}">عضویت در انجمن</a></li>
+
           @auth
             @if(auth()->user()->role === 'admin')
               <li><a class="cta" href="{{ route('admin.dashboard') }}">پنل مدیریت</a></li>

@@ -103,6 +103,10 @@
             <a href="{{ route('board-members') }}" target="_blank">
                 👥 مشاهده هیئت مدیره
             </a>
+           <a href="{{ route('admin.registrations.index') }}" 
+   class="{{ request()->routeIs('admin.registrations.*') ? 'active' : '' }}">
+    📝 ثبت‌نام‌ها
+</a>
             <form method="POST" action="{{ route('logout') }}" style="margin-top: 20px;">
                 @csrf
                 <button type="submit" class="btn btn-danger" style="width: 100%;">🚪 خروج</button>

@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\BoardMemberController;
 use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\Admin\WelcomeController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Admin\RegistrationAdminController;
+use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -79,4 +81,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // مدیریت پیام‌ها
     Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
+
+
+    // فرم ثبت نام
+    Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
+// Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+   Route::get('/registrations', [RegistrationAdminController::class, 'index'])
+    ->name('registrations.index');
+
+Route::get('/registrations/{id}', [RegistrationAdminController::class, 'show'])
+    ->name('registrations.show');
 });
