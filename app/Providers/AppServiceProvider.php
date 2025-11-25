@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+         \View::composer('partials.footer', function ($view) {
+            $footerSettings = \App\Models\FooterSetting::first();
+            $footerLinks = \App\Models\FooterLink::active()->ordered()->with('page')->get();
+
+            $view->with(compact('footerSettings', 'footerLinks'));
+        });
     }
 }

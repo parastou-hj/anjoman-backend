@@ -8,6 +8,7 @@ use App\Models\Gallery;
 use App\Models\News;
 use App\Models\Menu;
 use App\Models\Welcome;
+use App\Models\AboutSection;
 
 
 class HomeController extends Controller
@@ -36,8 +37,8 @@ class HomeController extends Controller
         
         $menus = Menu::getMainMenusWithChildren();
 
-         $welcome = Welcome::first();
-
-        return view('home', compact('sliders', 'journals', 'galleries', 'news', 'menus', 'welcome'));
+          $welcome = Welcome::first();
+        $about = AboutSection::first();
+ return view('home', compact('sliders', 'journals', 'galleries', 'news', 'menus', 'welcome', 'about'));
     }
 }

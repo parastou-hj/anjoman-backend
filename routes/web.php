@@ -6,13 +6,17 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\BoardMemberController;
 use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\Admin\WelcomeController;
+use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\RegistrationAdminController;
+use App\Http\Controllers\Admin\FooterSettingController;
+use App\Http\Controllers\Admin\FooterLinkController;
 use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
@@ -66,6 +70,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('welcome', [WelcomeController::class, 'edit'])->name('welcome.edit');
     Route::put('welcome', [WelcomeController::class, 'update'])->name('welcome.update');
 
+      Route::get('about', [AboutSectionController::class, 'edit'])->name('about.edit');
+    Route::put('about', [AboutSectionController::class, 'update'])->name('about.update');
+
      // مدیریت صفحات داخلی
     Route::post('pages/upload-image', [AdminPageController::class, 'uploadImage'])->name('pages.upload-image');
     Route::resource('pages', AdminPageController::class)->except(['show']);
@@ -75,11 +82,20 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // مدیریت گالری
     Route::resource('galleries', GalleryController::class);
+     // مدیریت فوتر
+    Route::get('footer', [FooterSettingController::class, 'edit'])->name('footer.edit');
+    Route::put('footer', [FooterSettingController::class, 'update'])->name('footer.update');
+    Route::resource('footer-links', FooterLinkController::class)->except(['show']);
     
      
     // مدیریت اخبار
 
     Route::resource('news', AdminNewsController::class);
+
+    
+// مدیریت رمز عبور مدیر
+     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
     
     // مدیریت پیام‌ها
     Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);

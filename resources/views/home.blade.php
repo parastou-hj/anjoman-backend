@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'صفحه اصلی') 
+<!-- @section('title', ' ')  -->
 @section('content')
   <div id="hero" class="">
  
@@ -72,17 +72,30 @@
     <section id="about" class="section">
       <div class="about">
         <div>
-          <h3>درباره انجمن</h3>
-          <p class="lead">انجمن علمی توسعه روستایی شبکه‌ای از پژوهشگران، دانشجویان و کنشگران محلی است که با هدف <strong>توانمندسازی جوامع روستایی</strong> از طریق پژوهش‌های مسئله‌محور، آموزش‌های کاربردی و ترویج دانش بومی فعالیت می‌کند.</p>
+         <h3>{{ optional($about)->title ?? 'درباره انجمن' }}</h3>
+          <p class="lead">{!! optional($about)->lead ?? 'انجمن علمی توسعه روستایی شبکه‌ای از پژوهشگران، دانشجویان و کنشگران محلی است که با هدف <strong>توانمندسازی جوامع روستایی</strong> از طریق پژوهش‌های مسئله‌محور، آموزش‌های کاربردی و ترویج دانش بومی فعالیت می‌کند.' !!}</p>
+          @php
+            $highlights = collect([
+                optional($about)->highlight_one,
+                optional($about)->highlight_two,
+                optional($about)->highlight_three,
+            ])->filter();
+          @endphp
           <div class="highlights">
-            <div class="pill">پژوهش‌های مسئله‌محور</div>
-            <div class="pill">توانمندسازی محلی</div>
-            <div class="pill">دانش‌بنیان و نوآوری</div>
+              @if($highlights->isNotEmpty())
+              @foreach($highlights as $highlight)
+                <div class="pill">{{ $highlight }}</div>
+              @endforeach
+            @else
+              <div class="pill">پژوهش‌های مسئله‌محور</div>
+              <div class="pill">توانمندسازی محلی</div>
+              <div class="pill">دانش‌بنیان و نوآوری</div>
+            @endif
           </div>
         </div>
         <aside class="card" style="padding:16px">
-          <h4 style="margin-top:0">ماموریت و چشم‌انداز</h4>
-          <p class="muted">توسعه پایدار و عدالت‌محور، با اتکا به سرمایه‌های انسانی و طبیعی روستاها.</p>
+         <h4 style="margin-top:0">{{ optional($about)->mission_title ?? 'ماموریت و چشم‌انداز' }}</h4>
+          <p class="muted">{{ optional($about)->mission_description ?? 'توسعه پایدار و عدالت‌محور، با اتکا به سرمایه‌های انسانی و طبیعی روستاها.' }}</p>
         </aside>
       </div>
     </section>

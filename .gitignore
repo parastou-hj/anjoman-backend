@@ -5,8 +5,8 @@
 .DS_Store
 Thumbs.db
 
-# Environment files (شامل اطلاعات حساس)
-.env
+
+
 .env.backup
 .env.production
 

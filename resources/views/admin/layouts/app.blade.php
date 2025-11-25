@@ -82,6 +82,9 @@
             <a href="{{ route('admin.welcome.edit') }}" class="{{ request()->routeIs('admin.welcome.*') ? 'active' : '' }}">
                 🙌 مدیریت خوشامدگویی
             </a>
+            <a href="{{ route('admin.about.edit') }}" class="{{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+                ℹ️ مدیریت درباره انجمن
+            </a>
             <a href="{{ route('admin.pages.index') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
                 📄 صفحات داخلی
             </a>
@@ -94,8 +97,17 @@
             <a href="{{ route('admin.news.index') }}" class="{{ request()->routeIs('admin.news.*') ? 'active' : '' }}">
                 📰 مدیریت اخبار
             </a>
+            <a href="{{ route('admin.footer.edit') }}" class="{{ request()->routeIs('admin.footer.*') ? 'active' : '' }}">
+                📮 مدیریت فوتر
+            </a>
+            <a href="{{ route('admin.footer-links.index') }}" class="{{ request()->routeIs('admin.footer-links.*') ? 'active' : '' }}">
+                🔗 پیوندهای فوتر
+            </a>
             <a href="{{ route('admin.contact-messages.index') }}" class="{{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
                 ✉️ پیام‌های تماس
+            </a>
+             <a href="{{ route('admin.password.edit') }}" class="{{ request()->routeIs('admin.password.*') ? 'active' : '' }}">
+                🔒 تغییر رمز عبور
             </a>
             <a href="/" target="_blank">
                 🌐 مشاهده سایت

@@ -8,22 +8,34 @@
     <div>
       <h4>پیوندهای سریع</h4>
       <ul>
-        <li><a href="/pages/journals">مجلات</a></li>
-        <li><a href="/pages/about">درباره‌ما</a></li>
-        <li><a href="#gallery">گالری</a></li>
+  @forelse($footerLinks as $link)
+          <li><a href="{{ $link->url }}">{{ $link->title }}</a></li>
+        @empty
+          <li class="muted">پیوندی ثبت نشده است.</li>
+        @endforelse
       </ul>
     </div>
 
     <div>
-      <h4>دسترسی سریع</h4>
-      <ul>
-        <li><a href="#contact">تماس با ما</a></li>
-        @auth
-          @if(auth()->user()->role === 'admin')
-            <li><a href="{{ route('admin.dashboard') }}">پنل مدیریت</a></li>
-          @endif
-        @endauth
-      </ul>
+      <h4>اطلاعات تماس</h4>
+      <ul style="list-style:none; padding:0; margin:0">
+        @if($footerSettings?->address)
+          <li class="muted"> آدرس: 
+             {{ $footerSettings->address }}</li>
+        @endif
+        @if($footerSettings?->phone)
+          <li class="muted">
+            شماره تماس : 
+             {{ $footerSettings->phone }}</li>
+        @endif
+        @if($footerSettings?->email)
+          <li class="muted"> 
+            ایمیل : 
+            {{ $footerSettings->email }}</li>
+        @endif
+        @unless($footerSettings)
+          <li class="muted">اطلاعات تماس هنوز ثبت نشده است.</li>
+        @endunless
     </div>
   </div>
 

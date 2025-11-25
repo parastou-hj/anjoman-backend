@@ -1,14 +1,17 @@
 <header>
-    <div class="container nav" role="navigation" aria-label="ناوبری اصلی">
-
-      <a href="/" class="brand">
+    <div class="container  py-3" role="navigation" aria-label="ناوبری اصلی">
+ 
+      <div class="row">
+        <a href="/" class="brand">
         <div class="logo">
-          <img src="" alt="">
+          <img src="/images/logo.jpeg" alt="">
         </div>
-        <span>انجمن علمی توسعه روستایی</span>
+        <span>انجمن علمی توسعه روستایی ایران</span>
       </a>
+      </div>
 
-      <button class="menu-btn">☰</button>
+     <div class="row mt-3">
+       <button class="menu-btn">☰</button>
 
       <nav id="primary-nav">
         <ul>
@@ -36,19 +39,17 @@
             </li>
           @endforeach
 
-          {{-- دکمه عضویت --}}
-          <li><a class="cta" href="{{ route('admin.register.form') }}">عضویت در انجمن</a></li>
-
           @auth
-            @if(auth()->user()->role === 'admin')
+             @if(request()->is('admin*') && auth()->user()->role === 'admin')
               <li><a class="cta" href="{{ route('admin.dashboard') }}">پنل مدیریت</a></li>
             @endif
           @else
-            <li><a class="cta" href="{{ route('login') }}">ورود</a></li>
+            <li><a class="" href="{{ route('login') }}"></a></li>
           @endauth
 
         </ul>
       </nav>
+     </div>
 
     </div>
 </header>
