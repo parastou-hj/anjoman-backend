@@ -73,7 +73,8 @@
            align-items: center;
            gap: 12px;
            font-weight: 700;
-           color: var(--brand)
+           color: var(--brand);
+           width: max-content;
        }
 
        .brand .logo {
@@ -175,6 +176,232 @@
            border-radius: 5px;
            box-shadow: var(--shadow)
        }
+       #primary-nav{
+        display: none;
+       }
+       /* Overlay */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    /* z-index: 65; */
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* استایل‌های موبایل */
+@media (max-width: 768px) {
+    
+    /* نمایش دکمه منو */
+    .menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 80;
+        position: relative;
+    }
+    
+    /* مخفی کردن navigation دسکتاپ */
+    .desktop-nav {
+        display: none !important;
+    }
+    
+    /* مخفی کردن ردیف navigation دسکتاپ */
+    .row.mt-3 {
+        display: none !important;
+    }
+    
+    /* Off-canvas Navigation */
+    #primary-nav {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100vh;
+        background: white;
+        z-index: 70;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        box-shadow: var(--shadow);
+        display: block;
+    }
+    
+    #primary-nav.active {
+        right: 0;
+    }
+    
+    /* هدر منوی موبایل */
+    #primary-nav::before {
+        content: 'منوی دسترسی';
+        display: block;
+        padding: 20px;
+        background: var(--brand);
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        /* margin-bottom: 10px; */
+        text-align: right;
+    }
+    
+    /* آیتم‌های منو در موبایل */
+    #primary-nav ul {
+        flex-direction: column;
+        gap: 0;
+        /* padding: 0 15px 20px; */
+        list-style: none;
+        margin: 0;
+    }
+    
+    #primary-nav li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+        position: relative;
+    }
+    
+    #primary-nav li:last-child {
+        border-bottom: none;
+    }
+    
+    #primary-nav a {
+        padding: 15px 10px;
+        border-radius: 0;
+        justify-content: space-between;
+        width: 100%;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    #primary-nav a:hover {
+        background: #f8f9fa;
+        color: var(--brand);
+        transform: none;
+    }
+    
+    /* آکاردئون زیرمنوها */
+    #primary-nav .has-submenu .submenu {
+        position: static;
+        display: block;
+        background: #f8f9fa;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: none;
+    }
+    
+    #primary-nav .has-submenu.active .submenu {
+        max-height: 500px;
+    }
+    
+    #primary-nav .has-submenu span {
+        transition: transform 0.3s ease;
+        font-size: 12px;
+    }
+    
+    #primary-nav .has-submenu.active span {
+        transform: rotate(180deg);
+    }
+    
+    #primary-nav .submenu li {
+        border-bottom: 1px solid #e9ecef;
+        width: 100%;
+    }
+    
+    #primary-nav .submenu li:last-child {
+        border-bottom: none;
+    }
+    
+    #primary-nav .submenu a {
+        padding: 12px 20px;
+        padding-right: 30px;
+        font-size: 14px;
+        color: #666;
+        font-weight: normal;
+    }
+    
+    #primary-nav .submenu a:hover {
+        background: #e9ecef;
+        color: var(--brand);
+    }
+    
+    /* دکمه CTA در موبایل */
+    #primary-nav a.cta {
+        background: var(--brand);
+        color: white;
+        margin: 10px;
+        border-radius: 8px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    #primary-nav a.cta:hover {
+        background: var(--brand-2);
+    }
+    
+    /* بهبود لوگو در موبایل */
+    .brand span {
+        font-size: 16px;
+    }
+    
+    .brand .logo img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* انیمیشن‌های اضافی */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* بهبود scrollbar */
+#primary-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+#primary-nav::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#primary-nav::-webkit-scrollbar-thumb {
+    background: var(--brand);
+    border-radius: 4px;
+}
+
+#primary-nav::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-2);
+}
+
 
        .welcome {
            margin: 14px auto 0
@@ -394,7 +621,10 @@
            display: grid;
            grid-template-columns: 2fr 1fr 1fr;
            gap: 24px;
-           padding: 28px 0
+           padding: 28px 12px
+       }
+       .footer-grid i{
+        margin-left: 5px;
        }
 
        .footer-grid h4 {
@@ -456,29 +686,7 @@
        }
 
        @media (max-width: 720px) {
-           .menu-btn {
-               display: block
-           }
-
-           nav {
-               position: fixed;
-               inset: 64px 14px auto 14px;
-               background: #fff;
-               border: 1px solid #eef1f4;
-               border-radius: 5px;
-               box-shadow: var(--shadow);
-               padding: 8px;
-               display: none
-           }
-
-           nav.open {
-               display: block
-           }
-
-           nav ul {
-               flex-direction: column
-           }
-
+       
            .footer-grid {
                grid-template-columns: 1fr
            }
@@ -693,24 +901,7 @@
                display: block
            }
 
-           nav {
-               position: fixed;
-               inset: 64px 14px auto 14px;
-               background: #fff;
-               border: 1px solid #eef1f4;
-               border-radius: 16px;
-               box-shadow: var(--shadow);
-               padding: 8px;
-               display: none
-           }
-
-           nav.open {
-               display: block
-           }
-
-           nav ul {
-               flex-direction: column
-           }
+       
 
            .members-grid {
                grid-template-columns: 1fr

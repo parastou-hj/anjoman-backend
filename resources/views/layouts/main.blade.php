@@ -8,14 +8,11 @@
   <meta name="description" content="@yield('meta_description', 'وب‌سایت رسمی انجمن علمی توسعه روستایی')" />
 
   <!-- Fonts & CSS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/inner.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -129,7 +126,39 @@ window.addEventListener('keydown', (e)=>{
 lightbox.addEventListener('click', (e)=>{ 
   if(e.target === lightbox) closeLightbox(); 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.querySelector('.menu-btn');
+    const nav = document.querySelector('#primary-nav');
+    const overlay = document.querySelector('.nav-overlay');
+    
+    if (!menuBtn || !nav) return;
+    
+
+    menuBtn.onclick = () => {
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        menuBtn.innerHTML = nav.classList.contains('active') ? '<i class="fa fa-times"></i>' : '<i class="fa fa-bars"></i>';
+    };
+    
+
+    overlay.onclick = () => menuBtn.click();
+    
+   
+    document.querySelectorAll('#primary-nav .has-submenu a').forEach(link => {
+        link.onclick = (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                link.parentElement.classList.toggle('active');
+            }
+        };
+    });
+
+});
   </script>
+
+
 
   @stack('scripts')
 

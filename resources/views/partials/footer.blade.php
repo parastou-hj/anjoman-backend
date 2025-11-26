@@ -20,16 +20,20 @@
       <h4>اطلاعات تماس</h4>
       <ul style="list-style:none; padding:0; margin:0">
         @if($footerSettings?->address)
-          <li class="muted"> آدرس: 
+          <li class="muted"> 
+           <i class="fa-solid fa-location-dot"></i>
+            آدرس: 
              {{ $footerSettings->address }}</li>
         @endif
         @if($footerSettings?->phone)
           <li class="muted">
+            <i class="fa-solid fa-phone"></i>
             شماره تماس : 
              {{ $footerSettings->phone }}</li>
         @endif
         @if($footerSettings?->email)
           <li class="muted"> 
+          <i class="fa-regular fa-envelope"></i>
             ایمیل : 
             {{ $footerSettings->email }}</li>
         @endif

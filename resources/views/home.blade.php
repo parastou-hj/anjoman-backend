@@ -29,7 +29,7 @@
  
     <section class="welcome">
       <div class="container box">
-       <h1><span class="highlight">{{ optional($welcome)->title ?? 'به سایت انجمن علمی جغرافیا و برنامه‌ریزی روستایی ایران خوش آمدید' }}</span></h1>
+       <h1><span class="highlight">{{ optional($welcome)->title ?? 'به سایت انجمن علمی توسعه روستایی ایران خوش آمدید' }}</span></h1>
         <p>
           {{ optional($welcome)->content ?? 'این پایگاه اینترنتی با هدف اطلاع‌رسانی از برنامه‌های انجمن و برقراری ارتباط بین اعضا، شاخه‌های وابسته، کمیته‌های مطالعات و سایر مراکز مرتبط با انجمن راه‌اندازی شده است.' }}
         </p>

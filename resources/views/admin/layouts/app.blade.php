@@ -23,7 +23,7 @@
         .header h1 { font-size: 24px; color: #1a1a2e; }
         
         /* Card */
-        .card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;overflow:auto }
         .card-title { font-size: 20px; margin-bottom: 20px; color: #1a1a2e; }
         
         /* Table */
@@ -103,9 +103,9 @@
             <a href="{{ route('admin.footer-links.index') }}" class="{{ request()->routeIs('admin.footer-links.*') ? 'active' : '' }}">
                 🔗 پیوندهای فوتر
             </a>
-            <a href="{{ route('admin.contact-messages.index') }}" class="{{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
+            {{-- <a href="{{ route('admin.contact-messages.index') }}" class="{{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
                 ✉️ پیام‌های تماس
-            </a>
+            </a> --}}
              <a href="{{ route('admin.password.edit') }}" class="{{ request()->routeIs('admin.password.*') ? 'active' : '' }}">
                 🔒 تغییر رمز عبور
             </a>
@@ -115,10 +115,10 @@
             <a href="{{ route('board-members') }}" target="_blank">
                 👥 مشاهده هیئت مدیره
             </a>
-           <a href="{{ route('admin.registrations.index') }}" 
+           {{-- <a href="{{ route('admin.registrations.index') }}" 
    class="{{ request()->routeIs('admin.registrations.*') ? 'active' : '' }}">
     📝 ثبت‌نام‌ها
-</a>
+</a> --}}
             <form method="POST" action="{{ route('logout') }}" style="margin-top: 20px;">
                 @csrf
                 <button type="submit" class="btn btn-danger" style="width: 100%;">🚪 خروج</button>
