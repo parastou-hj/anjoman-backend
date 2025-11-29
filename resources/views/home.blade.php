@@ -42,7 +42,7 @@
       @if($journals->count() > 0)
         <div class="owl-carousel journals-carousel">
           @foreach($journals as $journal)
-            <div class="p-2">
+            <div class="p-2 m-2">
               @if($journal->link)
               <a class="card item" href="{{ $journal->link }}"  target="_blank">
                 <div class="card-img">
